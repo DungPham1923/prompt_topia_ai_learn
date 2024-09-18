@@ -3,17 +3,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { signIn, signOut, useSession , getProviders } from "next-auth/react";
+import { useRouter } from 'next/navigation';
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
   const isUserLoggedIn = true; // Chỉ là giá trị mẫu
-
+  const router = useRouter();
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
-
   const { data: session } = useSession();
-
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -43,7 +42,14 @@ const Nav = () => {
             <Link href="/create-prompt" className="black_btn">
               Create Post
             </Link>
-            <button type="button" onClick={signOut} className="outline_btn">
+            <button
+              type="button"
+              onClick={() => {
+                router.push('/');
+                signOut();
+              }}
+              className="outline_btn"
+            >
               Sign Out
             </button>
 

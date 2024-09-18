@@ -15,7 +15,7 @@ const handler = NextAuth({
   callbacks: {
     
     async session({ session }) {
-      console.log(session.user.email)
+      //console.log(session.user.email)
       try {
         await connectToDB(); // Đảm bảo đã kết nối đến database
 
